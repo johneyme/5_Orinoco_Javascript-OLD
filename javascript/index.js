@@ -1,3 +1,5 @@
+
+
 const api = "http://localhost:3000/api/cameras";
 
 const getProduct = async function () {
@@ -17,7 +19,7 @@ const getProduct = async function () {
           cardItems.appendChild(divRow)
 
           const divCol = document.createElement('div');
-          divCol.setAttribute('class', 'col-12 col-lg-4')
+          divCol.setAttribute('class', 'col-12 col-lg-4 mt-3')
           divRow.appendChild(divCol)
 
           const card = document.createElement('div');
@@ -35,7 +37,27 @@ const getProduct = async function () {
           titleProd.textContent = data.name
           cardTitle.appendChild(titleProd)
 
-         
+          const cardText = document.createElement('div');
+          cardText.setAttribute('class', 'card-text')
+          cardTitle.appendChild(cardText)
+          const desProd = document.createElement('p')
+          const priProd = document.createElement('p')
+          const butProd = document.createElement('button')
+          butProd.setAttribute('class', 'float-right btn btn-warning')
+          butProd.setAttribute('type', 'button')
+          desProd.textContent = data.description
+          priProd.textContent = `${data.price} Francs => ${Math.round(data.price/6.5597)} €`
+          butProd.textContent = "Acheter"
+          cardText.appendChild(desProd)
+          cardText.appendChild(priProd)
+          cardText.appendChild(butProd)
+
+          const cardImg = document.createElement('img');
+          cardImg.setAttribute('class', 'card-img mt-3')
+          cardText.appendChild(cardImg)
+          const imgProd = data.imageUrl
+          cardImg.setAttribute('src', imgProd)
+          
         }
       
       for (let i = 0; i < data.length; i++) {
@@ -52,16 +74,3 @@ const getProduct = async function () {
 
 getProduct();
 
-
-/*
-<div class="row">
-        <div class="col-12 col-lg-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Item 1</h5>
-              <p class="card-text">blablabla</p>
-            </div>
-          </div>
-        </div>
-
-*/
