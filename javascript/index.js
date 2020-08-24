@@ -1,5 +1,3 @@
-
-
 const api = "http://localhost:3000/api/cameras";
 
 const getProduct = async function () {
@@ -12,15 +10,10 @@ const getProduct = async function () {
 
       
       function templateItems(data) {
-          const cardItems = document.getElementById('items')
-          
-          const divRow = document.createElement('div');
-          divRow.setAttribute('class', 'row')
-          cardItems.appendChild(divRow)
-
+          const cardItems = document.querySelectorAll('.row')
           const divCol = document.createElement('div');
           divCol.setAttribute('class', 'col-12 col-lg-4 mt-3')
-          divRow.appendChild(divCol)
+          cardItems[2].appendChild(divCol)
 
           const card = document.createElement('div');
           card.setAttribute('class', 'card')
@@ -42,15 +35,14 @@ const getProduct = async function () {
           cardTitle.appendChild(cardText)
           const desProd = document.createElement('p')
           const priProd = document.createElement('p')
-          const butProd = document.createElement('button')
-          butProd.setAttribute('class', 'float-right btn btn-warning')
-          butProd.setAttribute('type', 'button')
+          const butProd = document.createElement('div')
+          butProd.innerHTML = `<button class="float-right btn btn-warning" type='button'><a href="produit.html?id=${data._id}">Acheter</a></button>`
           desProd.textContent = data.description
           priProd.textContent = `${data.price} Francs => ${Math.round(data.price/6.5597)} €`
-          butProd.textContent = "Acheter"
           cardText.appendChild(desProd)
           cardText.appendChild(priProd)
           cardText.appendChild(butProd)
+          
 
           const cardImg = document.createElement('img');
           cardImg.setAttribute('class', 'card-img mt-3')
