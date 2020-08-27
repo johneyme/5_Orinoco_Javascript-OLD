@@ -1,3 +1,4 @@
+ ////////// REQUETE API VIA FETCH ///////////
 const api = "http://localhost:3000/api/cameras";
 
 const getProduct = async function () {
@@ -6,55 +7,78 @@ const getProduct = async function () {
     if (response.ok) {
       let data = await response.json();
       console.log(data)
-    
 
-      
+///////////FONCTION MODIFICATION DOM///////////
       function templateItems(data) {
-          const cardItems = document.querySelectorAll('.row')
-          const divCol = document.createElement('div');
-          divCol.setAttribute('class', 'col-12 col-lg-4 mt-3')
-          cardItems[2].appendChild(divCol)
-
-          const card = document.createElement('div');
-          card.setAttribute('class', 'card')
-          divCol.appendChild(card)
-
-          const cardBody = document.createElement('div');
-          cardBody.setAttribute('class', 'card-body')
-          card.appendChild(cardBody)
-
-          const cardTitle = document.createElement('div');
-          cardTitle.setAttribute('class', 'card-title')
-          cardBody.appendChild(cardTitle)
-          const titleProd = document.createElement('h5')
-          titleProd.textContent = data.name
-          cardTitle.appendChild(titleProd)
-
-          const cardText = document.createElement('div');
-          cardText.setAttribute('class', 'card-text')
-          cardTitle.appendChild(cardText)
-          const desProd = document.createElement('p')
-          const priProd = document.createElement('p')
-          const butProd = document.createElement('div')
-          butProd.innerHTML = `<button class="float-right btn btn-warning" type='button'><a href="produit.html?id=${data._id}">Acheter</a></button>`
-          desProd.textContent = data.description
-          priProd.textContent = `${data.price} Francs => ${Math.round(data.price/6.5597)} €`
-          cardText.appendChild(desProd)
-          cardText.appendChild(priProd)
-          cardText.appendChild(butProd)
-          
-
-          const cardImg = document.createElement('img');
-          cardImg.setAttribute('class', 'card-img mt-3')
-          cardText.appendChild(cardImg)
-          const imgProd = data.imageUrl
-          cardImg.setAttribute('src', imgProd)
-          
-        }
       
-      for (let i = 0; i < data.length; i++) {
-        templateItems(data[i]);
-      }
+
+// Ajout de la Div Col dans la div row items
+
+  const cardItems = document.getElementById("items");
+  let divCol = document.createElement('div');
+  divCol.setAttribute('class', 'col-12 col-lg-4 mt-3');
+  cardItems.appendChild(divCol);
+  
+
+// Creation div card dans la div col
+
+const card = document.createElement('div');
+card.setAttribute('class', 'card')
+divCol.appendChild(card)
+
+
+// Creation div card body dans la div card
+
+const cardBody = document.createElement('div');
+cardBody.setAttribute('class', 'card-body')
+card.appendChild(cardBody)
+
+
+// Creation Div title (+ ajout du titre)  dans la div card body
+
+const cardTitle = document.createElement('div');
+cardTitle.setAttribute('class', 'card-title')
+cardBody.appendChild(cardTitle)
+const titleProd = document.createElement('h5')
+titleProd.textContent = data.name
+cardTitle.appendChild(titleProd)
+
+
+// Creation div text/description (+ ajout du prix + ajout du bouton acheter) dans la div cardItems
+
+const cardText = document.createElement('div');
+  cardText.setAttribute('class', 'card-text')
+  cardTitle.appendChild(cardText)
+
+  // Creation div text/description (+ ajout du prix + ajout du bouton acheter) dans la div cardItems
+  const desProd = document.createElement('p')
+  const priProd = document.createElement('p')
+  const butProd = document.createElement('button')
+  butProd.setAttribute("class", "float-right btn btn-warning")
+  butProd.setAttribute("type", "button")
+  butProd.setAttribute("id", "acheter")
+  butProd.innerHTML = `<a href="produit.html?id=${data._id}">Acheter</a>`
+  desProd.textContent = data.description
+  priProd.textContent = `${data.price} Francs => ${Math.round(data.price/6.5597)} €`
+  cardText.appendChild(desProd)
+  cardText.appendChild(priProd)
+  cardText.appendChild(butProd)   
+
+
+// Ajout de l'image dans la div card text
+
+  const cardImg = document.createElement('img');
+    cardImg.setAttribute('class', 'card-img mt-3')
+    cardText.appendChild(cardImg)
+    const imgProd = data.imageUrl
+    cardImg.setAttribute('src', imgProd)
+  
+       
+        }
+///////// BOUCLE AFIN DE RECUPERER CHAQUE PRODUIT DE L'API ///////   
+for (let i = 0; i < data.length; i++) {
+  templateItems(data[i]); 
+}     
     } 
     else {
       console.error('reponse serveur : ', response.status);
