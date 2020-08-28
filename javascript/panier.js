@@ -1,4 +1,9 @@
     function articlesPanier (){
+        
+        const nomProd = localStorage.getItem('name')
+        const priceProd = localStorage.getItem('price')
+
+        
         const rowId = document.getElementById('contenupanier')
         const divCol = document.createElement('div')
         divCol.setAttribute('class', 'col-md-8 order-md-2 mb-4')
@@ -23,17 +28,17 @@
 
         const itemTitle = document.createElement('h6')
         itemTitle.setAttribute("class", 'my-0')
-        itemTitle.textContent = "APN N°000"
+        itemTitle.textContent = nomProd
         div.appendChild(itemTitle)
 
         const price = document.createElement('span')
         price.setAttribute('class', 'text-muted')
-        price.textContent = '€' //Prix de chaques articles
+        price.textContent = `${Math.round(priceProd/6.5597)} €` 
         liList.appendChild(price)
 
         const liPrice = document.createElement('li')
         liPrice.setAttribute('class', 'list-group-item d-flex justify-content-between')
-        liPrice.innerHTML = '<span>Total (EUR)</span><strong>00000€</strong>'
+        liPrice.innerHTML = `<span>Total (EUR)</span><strong>${Math.round(priceProd/6.5597)} €</strong>`
         ulList.appendChild(liPrice)
         }
 

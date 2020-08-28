@@ -19,6 +19,7 @@ const getProduct = async function () {
       
       function templateItems() {
 
+        
         // Ajout de la Div Col dans la div row items
         const cardItems = document.getElementById("items")
           const divCol = document.createElement('div');
@@ -91,13 +92,33 @@ const getProduct = async function () {
           butProd.textContent = 'Ajouter au panier'         
           cardText.appendChild(butProd)
           
-          butProd.addEventListener("click", console.log(localStorage.setItem('name', data.name)))
+         /* butProd.addEventListener('click', function(){
+ 
+            let prodDATA = {
+                nom: data.name,
+                price: data.price,
+                _id: data._id
+            };
+            prodDATA = JSON.stringify(prodDATA);
+             
+            
+            var prodId = localStorage.length+1;
+            localStorage[prodId] = prodDATA;
+             
+            return false;
+        });*/
 
-            
-            
-      
+          butProd.addEventListener("click", function remplissageStockage() {
+            localStorage.setItem('name', data.name);
+            localStorage.setItem('price', data.price);
+            localStorage.setItem('_id', data._id);
+            butProd.textContent = 'Ajouté !'
+          })
           
-            
+          /*for (let i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i)
+            console.log(key, localStorage.getItem(key))
+        }*/
 
 
           // Ajout de l'image dans la div card text
