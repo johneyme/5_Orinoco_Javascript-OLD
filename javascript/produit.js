@@ -59,13 +59,13 @@ const getProduct = async function () {
           const form = document.createElement("form"); 
 	        form.setAttribute("id", "formSelect");
 
-	        const selectLenses = document.createElement("select"); // On crée donc un élément select 
+	        const selectLenses = document.createElement("select"); // ON CREE UN ELEMENT SELECT
 	        selectLenses.setAttribute("class", "form-control custom-select mb-4");
-	        selectLenses.setAttribute("required", ""); // On oblige l'user à faire un choix
+	        selectLenses.setAttribute("required", ""); // CHOIX OBLIGATOIRE
 
-	        let optionTitle = document.createElement("option"); // On crée une première option qui servira de titre-info de notre liste déroulante
-	        optionTitle.setAttribute("selected", ""); // On sélectionne donc cette option de base
-	        optionTitle.setAttribute("disabled", ""); // Qu'on désactive pour ne pas être choisie
+	        let optionTitle = document.createElement("option"); // ON CREE UNE PREMIERE OPTION QUI SERVIRA D'INFORMATION
+	        optionTitle.setAttribute("selected", ""); // ON CHOISI LA PREMIERE OPTION DE BASE
+	        optionTitle.setAttribute("disabled", ""); // ON LA DESACTIVE AFIN QU'ELLE NE SOIT PAS SELECTIONNABLE
 	        optionTitle.setAttribute("value", "");
           optionTitle.textContent = "Choisissez la taille de la lentille:";
           cardText.appendChild(form)
@@ -78,15 +78,25 @@ const getProduct = async function () {
               choixLentille.textContent = lense;
               selectLenses.appendChild(choixLentille);
           }
-      
+          /*
+          document.getElementsByName('select').addEventListener('change', (event) => {
+            const lensesChosen = event.target.value;
+            console.log(lensesChosen)
+          })
+          */
           
           // Ajout Bouton Ajouter au panier
           const butProd = document.createElement('button')
           butProd.setAttribute('class', 'float-right btn btn-warning')
           butProd.textContent = 'Ajouter au panier'         
           cardText.appendChild(butProd)
-          //butProd.addEventListener("click",)
-
+          /*
+          function ajouterPanier (data){
+          butProd.addEventListener("click", () => {
+            localStorage.setItem(data.name, JSON.stringify(product));
+            
+          })
+            */
 
 
           // Ajout de l'image dans la div card text
@@ -95,6 +105,8 @@ const getProduct = async function () {
           cardText.appendChild(cardImg)
           const imgProd = data.imageUrl
           cardImg.setAttribute('src', imgProd) 
+
+          
         } 
 
         templateItems()
