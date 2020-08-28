@@ -90,13 +90,14 @@ const getProduct = async function () {
           butProd.setAttribute('class', 'float-right btn btn-warning')
           butProd.textContent = 'Ajouter au panier'         
           cardText.appendChild(butProd)
-          /*
-          function ajouterPanier (data){
-          butProd.addEventListener("click", () => {
-            localStorage.setItem(data.name, JSON.stringify(product));
+          
+          butProd.addEventListener("click", console.log(localStorage.setItem('name', data.name)))
+
             
-          })
-            */
+            
+      
+          
+            
 
 
           // Ajout de l'image dans la div card text

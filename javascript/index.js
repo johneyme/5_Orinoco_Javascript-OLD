@@ -57,7 +57,7 @@ const cardText = document.createElement('div');
   butProd.setAttribute("class", "float-right btn btn-warning")
   butProd.setAttribute("type", "button")
   butProd.setAttribute("id", "acheter")
-  butProd.innerHTML = `<a href="produit.html?id=${data._id}">Acheter</a>`
+  butProd.innerHTML = `<a class="text-decoration-none" href="produit.html?id=${data._id}">Acheter</a>`
   desProd.textContent = data.description
   priProd.textContent = `${data.price} Francs => ${Math.round(data.price/6.5597)} €`
   cardText.appendChild(desProd)
