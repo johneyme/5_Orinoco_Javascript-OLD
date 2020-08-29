@@ -1,7 +1,30 @@
     function articlesPanier (){
         
-        const nomProd = localStorage.getItem('name')
-        const priceProd = localStorage.getItem('price')
+        let product = ""
+        for (var i = 0; i < localStorage.length; i++) {
+            product = JSON.parse(localStorage.getItem(localStorage.key(i))) 
+            
+            product.forEach(element => {
+                console.log(element)
+                return element
+            });
+            console.log(element)
+            
+         }
+         
+
+
+         
+
+         
+        const camId = product[0];
+        const camName = product [1];
+        const camPrice = Math.round(product[2]/6.5597);
+    
+
+        const nomProd = camName
+        const priceProd = camPrice
+        
 
         
         const rowId = document.getElementById('contenupanier')
@@ -36,10 +59,10 @@
         price.textContent = `${Math.round(priceProd/6.5597)} €` 
         liList.appendChild(price)
 
-        const liPrice = document.createElement('li')
+        /*const liPrice = document.createElement('li')
         liPrice.setAttribute('class', 'list-group-item d-flex justify-content-between')
         liPrice.innerHTML = `<span>Total (EUR)</span><strong>${Math.round(priceProd/6.5597)} €</strong>`
-        ulList.appendChild(liPrice)
+        ulList.appendChild(liPrice)*/
 
         const butVider = document.getElementById('viderpanier')
         butVider.addEventListener('click', function() {
@@ -47,7 +70,7 @@
         })
 
         //LocalStorage
-        console.log(localStorage)
+        //console.log(localStorage)
         }
 
         

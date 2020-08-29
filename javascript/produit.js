@@ -91,7 +91,22 @@ const getProduct = async function () {
           butProd.setAttribute('class', 'float-right btn btn-warning')
           butProd.textContent = 'Ajouter au panier'         
           cardText.appendChild(butProd)
+
           
+          butProd.addEventListener('click', function(){
+            localStorage.setItem(data.name, JSON.stringify(prodInfo))
+          })
+          const prodInfo = [data._id, data.name, data.price]
+     
+          /*butProd.addEventListener("click", function remplissageStockage() {
+            localStorage.setItem('name', data.name);
+            localStorage.setItem('price', data.price);
+            localStorage.setItem('_id', data._id);
+            butProd.textContent = 'Ajouté !'
+          })*/
+
+         
+               
          /* butProd.addEventListener('click', function(){
  
             let prodDATA = {
@@ -107,14 +122,6 @@ const getProduct = async function () {
              
             return false;
         });*/
-
-          butProd.addEventListener("click", function remplissageStockage() {
-            localStorage.setItem('name', data.name);
-            localStorage.setItem('price', data.price);
-            localStorage.setItem('_id', data._id);
-            butProd.textContent = 'Ajouté !'
-          })
-          
           /*for (let i = 0; i < localStorage.length; i++) {
             let key = localStorage.key(i)
             console.log(key, localStorage.getItem(key))
@@ -127,6 +134,8 @@ const getProduct = async function () {
           cardText.appendChild(cardImg)
           const imgProd = data.imageUrl
           cardImg.setAttribute('src', imgProd) 
+
+          
 
           console.log(localStorage)
         } 
