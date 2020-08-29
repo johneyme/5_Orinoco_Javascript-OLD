@@ -128,7 +128,7 @@ const getProduct = async function () {
           const imgProd = data.imageUrl
           cardImg.setAttribute('src', imgProd) 
 
-          
+          console.log(localStorage)
         } 
 
         templateItems()

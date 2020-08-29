@@ -57,7 +57,7 @@ const cardText = document.createElement('div');
   butProd.setAttribute("class", "float-right btn btn-warning")
   butProd.setAttribute("type", "button")
   butProd.setAttribute("id", "acheter")
-  butProd.innerHTML = `<a class="text-decoration-none" href="produit.html?id=${data._id}">Acheter</a>`
+  butProd.innerHTML = `<a class="text-decoration-none text-dark" href="produit.html?id=${data._id}">Voir produit</a>`
   desProd.textContent = data.description
   priProd.textContent = `${data.price} Francs => ${Math.round(data.price/6.5597)} €`
   cardText.appendChild(desProd)
@@ -73,12 +73,13 @@ const cardText = document.createElement('div');
     const imgProd = data.imageUrl
     cardImg.setAttribute('src', imgProd)
   
-       
+    
         }
 ///////// BOUCLE AFIN DE RECUPERER CHAQUE PRODUIT DE L'API ///////   
 for (let i = 0; i < data.length; i++) {
   templateItems(data[i]); 
-}     
+}    
+console.log(localStorage) 
     } 
     else {
       console.error('reponse serveur : ', response.status);

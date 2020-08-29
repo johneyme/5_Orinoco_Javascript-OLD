@@ -40,7 +40,17 @@
         liPrice.setAttribute('class', 'list-group-item d-flex justify-content-between')
         liPrice.innerHTML = `<span>Total (EUR)</span><strong>${Math.round(priceProd/6.5597)} €</strong>`
         ulList.appendChild(liPrice)
+
+        const butVider = document.getElementById('viderpanier')
+        butVider.addEventListener('click', function() {
+            localStorage.clear()
+        })
+
+        //LocalStorage
+        console.log(localStorage)
         }
+
+        
 
 
 articlesPanier()
