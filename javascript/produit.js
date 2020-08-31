@@ -96,11 +96,14 @@ const getProduct = async function () {
           
           butProd.addEventListener('click', function(){
             localStorage.setItem(data.name, JSON.stringify(prodInfo))
+            totalPrice.push(Math.round(data.price/6.5597))
             butProd.textContent = "Ajouté !"
             
           })
+          
           const prodInfo = [data._id, data.name, data.price, lenses]
-
+          const totalPrice = []
+          
 
           // Ajout de l'image dans la div card text
           const cardImg = document.createElement('img');
