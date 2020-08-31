@@ -20,6 +20,7 @@ const getProduct = async function () {
       function templateItems() {
 
         
+
         // Ajout de la Div Col dans la div row items
         const cardItems = document.getElementById("items")
           const divCol = document.createElement('div');
@@ -95,37 +96,10 @@ const getProduct = async function () {
           
           butProd.addEventListener('click', function(){
             localStorage.setItem(data.name, JSON.stringify(prodInfo))
-          })
-          const prodInfo = [data._id, data.name, data.price]
-     
-          /*butProd.addEventListener("click", function remplissageStockage() {
-            localStorage.setItem('name', data.name);
-            localStorage.setItem('price', data.price);
-            localStorage.setItem('_id', data._id);
-            butProd.textContent = 'Ajouté !'
-          })*/
-
-         
-               
-         /* butProd.addEventListener('click', function(){
- 
-            let prodDATA = {
-                nom: data.name,
-                price: data.price,
-                _id: data._id
-            };
-            prodDATA = JSON.stringify(prodDATA);
-             
+            butProd.textContent = "Ajouté !"
             
-            var prodId = localStorage.length+1;
-            localStorage[prodId] = prodDATA;
-             
-            return false;
-        });*/
-          /*for (let i = 0; i < localStorage.length; i++) {
-            let key = localStorage.key(i)
-            console.log(key, localStorage.getItem(key))
-        }*/
+          })
+          const prodInfo = [data._id, data.name, data.price, lenses]
 
 
           // Ajout de l'image dans la div card text
@@ -136,7 +110,10 @@ const getProduct = async function () {
           cardImg.setAttribute('src', imgProd) 
 
           
-
+          const lienPanier = document.getElementById("lienpanier")
+          if(localStorage.length === 0){
+            lienPanier.setAttribute('href', 'paniervide.html')
+          }
           console.log(localStorage)
         } 
 

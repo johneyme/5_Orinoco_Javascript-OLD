@@ -11,7 +11,7 @@ const getProduct = async function () {
 ///////////FONCTION MODIFICATION DOM///////////
       function templateItems(data) {
       
-
+        
 // Ajout de la Div Col dans la div row items
 
   const cardItems = document.getElementById("items");
@@ -78,7 +78,11 @@ const cardText = document.createElement('div');
 ///////// BOUCLE AFIN DE RECUPERER CHAQUE PRODUIT DE L'API ///////   
 for (let i = 0; i < data.length; i++) {
   templateItems(data[i]); 
-}    
+}  
+const lienPanier = document.getElementById("lienpanier")
+        if(localStorage.length === 0){
+          lienPanier.setAttribute('href', 'paniervide.html')
+        }  
 console.log(localStorage) 
     } 
     else {
