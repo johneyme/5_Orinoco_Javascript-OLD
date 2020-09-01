@@ -30,8 +30,8 @@
         let product = ""
         for (var i = 0; i < localStorage.length; i++) {
             product = JSON.parse(localStorage.getItem(localStorage.key(i))) 
-            const nomProd = product[1]
-            const priceProd = product[2]    
+            const nomProd = product[0]
+            const priceProd = product[1]    
         
         const liList = document.createElement('li')
         liList.setAttribute('class', 'list-group-item d-flex justify-content-between lh-condensed')
@@ -50,12 +50,12 @@
         price.setAttribute('class', 'text-muted')
         price.textContent = `${Math.round(priceProd/6.5597)} €` 
         liList.appendChild(price)
-        
+         
             };
+
         console.log(localStorage)
                 
-
-
+       
         const liPrice = document.createElement('li')
         liPrice.setAttribute('class', 'list-group-item d-flex justify-content-between')
         liPrice.innerHTML = `<span>Total (EUR)</span><strong>0 €</strong>`
@@ -67,9 +67,18 @@
         butVider.textContent = "Veuillez patienter ..."
         window.setTimeout(function(){location.replace("paniervide.html")}, 2000)
         })
-
-
-       
+        /*class Client {
+            constructor(prenom, nom, email, adresse, pays, zipcode){
+            this.prenom = 'prenom'
+            this.nom = 'nom'
+            this.email = 'email@g.com'
+            this.adresse = 'adresse'
+            this.pays = 'pays'
+            this.zipcode = '01000'
+                 }
+            }*/
+    
+          
         }
 
         

@@ -1,5 +1,3 @@
-
-
 // Récupération de l'id du produit
 const queryString = window.location.search;
 const cameraId = new URLSearchParams(queryString).get('id');
@@ -79,13 +77,8 @@ const getProduct = async function () {
               let choixLentille = document.createElement('option');
               choixLentille.textContent = lense;
               selectLenses.appendChild(choixLentille);
-          }
-          /*
-          document.getElementsByName('select').addEventListener('change', (event) => {
-            const lensesChosen = event.target.value;
-            console.log(lensesChosen)
-          })
-          */
+          } 
+        
           
           // Ajout Bouton Ajouter au panier
           const butProd = document.createElement('button')
@@ -95,15 +88,27 @@ const getProduct = async function () {
 
           
           butProd.addEventListener('click', function(){
-            localStorage.setItem(data.name, JSON.stringify(prodInfo))
-            totalPrice.push(Math.round(data.price/6.5597))
-            butProd.textContent = "Ajouté !"
-            
+          localStorage.setItem(`${data._id} +${quantity}`, JSON.stringify(prodInfo))
+         
+          butProd.textContent = `Ajouté ! (${quantity})`
+          if(quantity <= 1, quantity++){
+            prodInfo.push(quantity)
+              }
           })
-          
-          const prodInfo = [data._id, data.name, data.price, lenses]
-          const totalPrice = []
-          
+        
+          /*function totalPriceInCartUpdate(){
+            let totalPriceInCart = localStorage.getItem("totalPriceInCart");
+            totalPriceInCart = JSON.parse(totalPriceInCart);
+            totalPriceInCart = totalPriceInCart + teddy.price / 100;
+            localStorage.setItem("totalPriceInCart", totalPriceInCart);
+          }
+    
+          totalPriceInCartUpdate();*/
+          let quantity = 1
+          const prodInfo = [data.name, data.price, lenses]
+         
+         
+         
 
           // Ajout de l'image dans la div card text
           const cardImg = document.createElement('img');
