@@ -67,7 +67,7 @@
         butVider.textContent = "Veuillez patienter ..."
         window.setTimeout(function(){location.replace("paniervide.html")}, 2000)
         })
-        /*class Client {
+        /class Client {
             constructor(prenom, nom, email, adresse, pays, zipcode){
             this.prenom = 'prenom'
             this.nom = 'nom'
@@ -76,9 +76,31 @@
             this.pays = 'pays'
             this.zipcode = '01000'
                  }
-            }*/
+            }
     
-          
+        const prenom = document.getElementById('prenom')
+        const nom = document.getElementById('nom')
+        const email = document.getElementById('email')
+        const adresse = document.getElementById('adresse')
+        const pays = document.getElementById('pays')
+        const codePostal = document.getElementById('codepostal')
+        const btnCommande = document.getElementById('confirmercommande')
+        
+
+        btnCommande.addEventListener('click', function(e){
+            e.preventDefault()
+          Client.push(prenom.value, nom.value, email.value, adresse.value, pays.value, codePostal.value)
+          console.log(prenom.value) 
+          console.log(nom.value)
+          console.log(email.value)
+          console.log(pays.value)
+          console.log(codePostal.value) 
+          console.log(adresse.value) 
+                
+         
+        })
+        
+        console.log(client)  
         }
 
         
