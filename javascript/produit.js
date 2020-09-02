@@ -87,13 +87,18 @@ const getProduct = async function () {
           cardText.appendChild(butProd)
 
           
-          butProd.addEventListener('click', function(){
+          butProd.addEventListener('click', function(e){
+            if(selectLenses.value === ""){
+              butProd.textContent= "Selectionnez une lentille !"
+            } else {
+            if(quantity <= 0, quantity++){
+            }
           localStorage.setItem(`${data._id} +${quantity}`, JSON.stringify(prodInfo))
-         
-          butProd.textContent = `Ajouté ! (${quantity})`
-          if(quantity <= 1, quantity++){
-            prodInfo.push(quantity)
-              }
+          prodInfo.push(selectLenses.value) 
+          butProd.textContent = `Ajouté ! Veuillez Patientez ...`
+          e.preventDefault()
+          window.setTimeout(function(){location.reload()}, 2000)
+          }
           })
         
           /*function totalPriceInCartUpdate(){
@@ -104,8 +109,8 @@ const getProduct = async function () {
           }
     
           totalPriceInCartUpdate();*/
-          let quantity = 1
-          const prodInfo = [data.name, data.price, lenses]
+          let quantity = 0
+          const prodInfo = [data.name, data.price]
          
          
          

@@ -1,3 +1,5 @@
+const api = "http://localhost:3000/api/cameras/"
+
     function articlesPanier (){
         
         
@@ -28,6 +30,10 @@
     
 
         let product = ""
+        const cartInformation = {
+            contact: {},
+            products: []
+    }
         for (var i = 0; i < localStorage.length; i++) {
             product = JSON.parse(localStorage.getItem(localStorage.key(i))) 
             const nomProd = product[0]
@@ -50,9 +56,15 @@
         price.setAttribute('class', 'text-muted')
         price.textContent = `${Math.round(priceProd/6.5597)} €` 
         liList.appendChild(price)
-         
+        
+        
+        cartInformation.products.push(nomProd)
+        
             };
+        
 
+       
+        
         console.log(localStorage)
                 
        
@@ -67,43 +79,81 @@
         butVider.textContent = "Veuillez patienter ..."
         window.setTimeout(function(){location.replace("paniervide.html")}, 2000)
         })
-        /class Client {
-            constructor(prenom, nom, email, adresse, pays, zipcode){
-            this.prenom = 'prenom'
-            this.nom = 'nom'
-            this.email = 'email@g.com'
-            this.adresse = 'adresse'
-            this.pays = 'pays'
-            this.zipcode = '01000'
-                 }
-            }
+        
     
-        const prenom = document.getElementById('prenom')
-        const nom = document.getElementById('nom')
-        const email = document.getElementById('email')
-        const adresse = document.getElementById('adresse')
-        const pays = document.getElementById('pays')
-        const codePostal = document.getElementById('codepostal')
+        const prenomId = document.getElementById('prenom')
+        const nomId = document.getElementById('nom')
+        const emailId = document.getElementById('email')
+        const adresseId = document.getElementById('adresse')
+        const paysId = document.getElementById('pays')
+        const codePostalId = document.getElementById('codepostal')
         const btnCommande = document.getElementById('confirmercommande')
         
 
-        btnCommande.addEventListener('click', function(e){
-            e.preventDefault()
-          Client.push(prenom.value, nom.value, email.value, adresse.value, pays.value, codePostal.value)
-          console.log(prenom.value) 
-          console.log(nom.value)
-          console.log(email.value)
-          console.log(pays.value)
-          console.log(codePostal.value) 
-          console.log(adresse.value) 
-                
-         
-        })
-        
-        console.log(client)  
+        const validationForm = () => {
+            const prenom = prenomId.value
+          const nom = nomId.value
+          const email = emailId.value
+          const adresse = adresseId.value
+          const pays = paysId.value
+          const codePostal = codePostalId.value
+
+          const client = {
+            "prenom": prenom,
+            "nom": nom,
+            "email": email,
+            "adresse": adresse,
+            "pays": pays,
+            "Code Postal": codePostal}
+
+            return cartInformation.contact = {
+                "prenom": prenom,
+                "nom": nom,
+                "email": email,
+                "adresse": adresse,
+                "pays": pays,
+                "Code Postal": codePostal}
         }
 
-        
+        const postData = async (method, api, dataELT) =>{
+            const response = await fetch (api, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method,
+                body: JSON.stringify(dataELT)
+            })
+            return await response.json();
+        }
+       
 
+        btnCommande.addEventListener('click', async function(e){
+            e.preventDefault()
+     
+        btnCommande.textContent = "Veuillez patienter ..."
+        const formValid = validationForm()
+        if (formValid !== false){
+            const response = await postData('POST', 'http://localhost:3000/api/cameras/', cartInformation)
+        }
+        //window.setTimeout(function(){location.replace("confirmation.html")}, 2000)
+        
+            })
+
+        }
 
 articlesPanier()
+
+
+
+
+/*class Client {
+    constructor(prenom, nom, email, adresse, pays, zipcode){
+    this.prenom = 'prenom'
+    this.nom = 'nom'
+    this.email = 'email@g.com'
+    this.adresse = 'adresse'
+    this.pays = 'pays'
+    this.zipcode = '01000'
+         }
+    }
+Client.push(prenom.value, nom.value, email.value, adresse.value, pays.value, codePostal.value)*/
