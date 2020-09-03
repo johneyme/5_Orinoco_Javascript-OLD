@@ -94,23 +94,22 @@ const getProduct = async function () {
             if(quantity <= 0, quantity++){
             }
           localStorage.setItem(`${data._id} +${quantity}`, JSON.stringify(prodInfo))
-          prodInfo.push(selectLenses.value) 
-          butProd.textContent = `Ajouté ! Veuillez Patientez ...`
-          e.preventDefault()
-          window.setTimeout(function(){location.reload()}, 2000)
+          butProd.textContent = `Ajouté ! (${quantity})`
+          //window.setTimeout(function(){location.reload()}, 2000)
           }
           })
         
-          /*function totalPriceInCartUpdate(){
+          /*function totalPriceInCart(){
             let totalPriceInCart = localStorage.getItem("totalPriceInCart");
             totalPriceInCart = JSON.parse(totalPriceInCart);
-            totalPriceInCart = totalPriceInCart + teddy.price / 100;
+            totalPriceInCart = totalPriceInCart + Math.round(data.price/6.5597);
             localStorage.setItem("totalPriceInCart", totalPriceInCart);
           }
     
-          totalPriceInCartUpdate();*/
+          totalPriceInCart();*/
+          //let totalPriceInCart = [data.price]
           let quantity = 0
-          const prodInfo = [data.name, data.price]
+          const prodInfo = [data._id, data.name, data.price]
          
          
          

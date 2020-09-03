@@ -78,7 +78,7 @@
             <div class="col-md-6 mb-3">
               <label for="firstName">Prénom</label>
               <input type="text" name="input" class="form-control" id="prenom" placeholder="" value="" required>
-              <div class="invalid-feedback">
+              <div id='prenominvalide' class="invalid-feedback">
                 La validation du prénom est requise.
               </div>
             </div>
@@ -94,38 +94,31 @@
 
 
           <div class="mb-3">
-            <label for="email" >Email <span class="text-muted"></span></label>
-            <input type="email" name="input" class="form-control" id="email" placeholder="exemple@exemple.com" required>
+            <label for="adresse" >Adresse <span class="text-muted"></span></label>
+            <input type="text" name="input" class="form-control" id="adresse" placeholder="" required>
             <div class="invalid-feedback">
-              Entrez un email valide
+              Entrez une adresse valide
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="address">Adresse</label>
-            <input type="text" name="input" class="form-control" id="adresse" placeholder="123 Rue Martin " name="input" required>
+            <label for="ville">Ville</label>
+            <input type="text" name="input" class="form-control" id="ville" placeholder="" name="input" required>
             <div class="invalid-feedback">
-              Entrez votre adresse de livraison.
+              Entrez votre ville.
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-md-5 mb-3">
-              <label for="country">Pays</label>
-              <input class="form-control" name="input" id="pays" placeholder="France" required>
-              
+          <div class="mb-3">
+            
+              <label for="email" >Email <span class="text-muted"></span></label>
+              <input type="email" name="input" class="form-control" id="email" placeholder="" required>
               <div class="invalid-feedback">
-                Selectionnez un pays valide.
+                Entrez un email valide
               </div>
             </div>
-            <div class="col-md-3 mb-3">
-              <label for="zip">Code Postal</label>
-              <input type="text" name="input" class="form-control" id="codepostal" placeholder="" required>
-              <div class="invalid-feedback">
-                Code postal requis.
-              </div>
-            </div>
-          </div>
+            
+          
 
           <hr class="mb-4">
           <button class="btn btn-primary btn-lg btn-block" type="submit" id="confirmercommande">Confirmer la commande</button>

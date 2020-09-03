@@ -1,5 +1,3 @@
-const api = "http://localhost:3000/api/cameras/"
-
     function articlesPanier (){
         
         
@@ -30,14 +28,17 @@ const api = "http://localhost:3000/api/cameras/"
     
 
         let product = ""
+
         const cartInformation = {
             contact: {},
             products: []
     }
         for (var i = 0; i < localStorage.length; i++) {
+            
             product = JSON.parse(localStorage.getItem(localStorage.key(i))) 
-            const nomProd = product[0]
-            const priceProd = product[1]    
+            const nomProd = product[1]
+            const priceProd = product[2] 
+            const idProd = product[0]   
         
         const liList = document.createElement('li')
         liList.setAttribute('class', 'list-group-item d-flex justify-content-between lh-condensed')
@@ -58,7 +59,7 @@ const api = "http://localhost:3000/api/cameras/"
         liList.appendChild(price)
         
         
-        cartInformation.products.push(nomProd)
+        cartInformation.products.push(idProd)
         
             };
         
@@ -83,45 +84,85 @@ const api = "http://localhost:3000/api/cameras/"
     
         const prenomId = document.getElementById('prenom')
         const nomId = document.getElementById('nom')
-        const emailId = document.getElementById('email')
         const adresseId = document.getElementById('adresse')
-        const paysId = document.getElementById('pays')
-        const codePostalId = document.getElementById('codepostal')
+        const villeId = document.getElementById('ville')
+        const emailId = document.getElementById('email')
         const btnCommande = document.getElementById('confirmercommande')
         
 
         const validationForm = () => {
+
+            const isNotEmpty = value => value !== ""  ? true:false;
+            const isLongEnough = value => value.length >= 2 ? true:false;
+            const containNumber = /[0-9]/;
+            const doNotContainNumber = value => !value.match(containNumber) ? true : false;
+            const specialCharacter = /[$£°&+,:;=?@#|'<>.^*()!"{}_]/
+            const doNotContainSpecialCharacter = value => !value.match(specialCharacter) ? true: false;
+            const regexEmail = /.+@.+\..+/
+            const isValidEmail = (value) => value.match(regexEmail)? true : false;
+            const isValidInput = (value) => isNotEmpty(value) && isLongEnough(value) && doNotContainNumber(value) && doNotContainSpecialCharacter(value);
+
+        /*const prenomErrorMessage = document.getElementById('prenominvalide')
+        const nomErrorMessage = document.getElementById('prenominvalide')
+        const adresseMessage = document.getElementById('prenominvalide')
+        const villeErrorMessage = document.getElementById('prenominvalide')
+        const emailErrorMessage = document.getElementById('prenominvalide')*/
             const prenom = prenomId.value
-          const nom = nomId.value
-          const email = emailId.value
-          const adresse = adresseId.value
-          const pays = paysId.value
-          const codePostal = codePostalId.value
+            const nom = nomId.value
+            const adresse = adresseId.value
+            const ville = villeId.value
+            const email = emailId.value
 
-          const client = {
-            "prenom": prenom,
-            "nom": nom,
-            "email": email,
-            "adresse": adresse,
-            "pays": pays,
-            "Code Postal": codePostal}
+          if(isValidInput(prenom)) {
+              true
+          } else {
+              prenomId.setAttribute('placeholder', 'Prenom requis !')
+              return false
+          }
 
-            return cartInformation.contact = {
+          if(isValidInput(nom)) {
+              true
+          } else {
+              nomId.setAttribute('placeholder', 'Nom requis !')
+              return false
+          }
+
+          if(isNotEmpty(adresse) && isLongEnough(adresse)) {
+              true
+          } else {
+              adresseId.setAttribute('placeholder', 'Adresse requise !')
+              return false
+          }
+          if(isValidInput(ville)) {
+              true
+          } else {
+            villeId.setAttribute('placeholder', 'Ville requise !')
+            return false
+          }
+
+          if(isValidEmail(email)) {
+              true
+          } else {
+            emailId.setAttribute('placeholder', 'Email requis !')
+            return false
+          }
+
+          return cartInformation.contact = {
                 "prenom": prenom,
                 "nom": nom,
-                "email": email,
                 "adresse": adresse,
-                "pays": pays,
-                "Code Postal": codePostal}
+                "ville": ville,
+                "email": email
+                }
         }
 
-        const postData = async (method, api, dataELT) =>{
-            const response = await fetch (api, {
+        const postData = async (method, url, dataElt) =>{
+            const response = await fetch (url, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 method,
-                body: JSON.stringify(dataELT)
+                body: JSON.stringify(dataElt)
             })
             return await response.json();
         }
@@ -129,14 +170,21 @@ const api = "http://localhost:3000/api/cameras/"
 
         btnCommande.addEventListener('click', async function(e){
             e.preventDefault()
-     
+            if(validationForm()){
+            
         btnCommande.textContent = "Veuillez patienter ..."
         const formValid = validationForm()
         if (formValid !== false){
-            const response = await postData('POST', 'http://localhost:3000/api/cameras/', cartInformation)
+            const response = await postData('POST', 'http://localhost:3000/api/cameras/order', cartInformation)
+            //window.setTimeout(function(){location.replace("confirmation.html")}, 2000)
         }
-        //window.setTimeout(function(){location.replace("confirmation.html")}, 2000)
+    } else {
+        validationForm()
+        btnCommande.textContent = "Veuillez remplir correctement les champs ..."
+    }
+        //localStorage.clear()
         
+        console.log(cartInformation)
             })
 
         }
