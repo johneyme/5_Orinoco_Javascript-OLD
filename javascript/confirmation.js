@@ -1,3 +1,8 @@
+
+if(localStorage.length === 0){
+    location.replace("paniervide.html")
+}
+
 const urlInfo = window.location.search.substr(1).split('&');
 const orderId = urlInfo[0].replace('id=', '');
 const total = urlInfo[1].replace('price=', '');
