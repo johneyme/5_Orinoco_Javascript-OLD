@@ -62,7 +62,7 @@ function articlesPanier() {
 
             const price = document.createElement('span')
             price.setAttribute('class', 'text-muted')
-            price.textContent = `${Math.round(priceProd / 6.5597)} €/pce = ${Math.round(sousTotal / 6.5597)} €`
+            price.textContent = `${priceProd} €/pce = ${sousTotal} €`
             liList.appendChild(price)
 
             cartInformation.products.push(idProd)
@@ -80,7 +80,7 @@ console.log(cartInformation)
 
     const liPrice = document.createElement('li')
     liPrice.setAttribute('class', 'list-group-item d-flex justify-content-between')
-    liPrice.innerHTML = `<span>Total (EUR)</span><strong>${Math.round(total / 6.5597)} €</strong>`
+    liPrice.innerHTML = `<span>Total (EUR)</span><strong>${total} €</strong>`
     ulList.appendChild(liPrice)
 
     const butVider = document.getElementById('viderpanier')
@@ -190,7 +190,8 @@ console.log(cartInformation)
             const formValid = validationForm()
             if (formValid !== false) {
                 const response = await postData('POST', 'http://localhost:3000/api/cameras/order', cartInformation)
-                //window.setTimeout(function(){location.replace("confirmation.html")}, 2000)
+                console.log(response.orderId)
+                window.setTimeout(function(){window.location =`confirmation.html?id=${response.orderId}&price=${total}&user=${prenom.value}`}, 2000)
             }
         } else {
             validationForm()

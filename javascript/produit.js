@@ -50,7 +50,7 @@ const getProduct = async function () {
         const desProd = document.createElement('p')
         const priProd = document.createElement('p')
         desProd.textContent = data.description
-        priProd.textContent = `${data.price} Francs => ${Math.round(data.price / 6.5597)} €`
+        priProd.textContent = `${data.price} €`
         cardText.appendChild(desProd)
         cardText.appendChild(priProd)
 
@@ -103,7 +103,7 @@ const getProduct = async function () {
         /*function totalPriceInCart(){
           let totalPriceInCart = localStorage.getItem("totalPriceInCart");
           totalPriceInCart = JSON.parse(totalPriceInCart);
-          totalPriceInCart = totalPriceInCart + Math.round(data.price/6.5597);
+          totalPriceInCart = totalPriceInCart + dataPrice;
           localStorage.setItem("totalPriceInCart", totalPriceInCart);
         }
   

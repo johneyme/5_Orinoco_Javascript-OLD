@@ -59,7 +59,7 @@ const cardText = document.createElement('div');
   butProd.setAttribute("id", "acheter")
   butProd.innerHTML = `<a class="text-decoration-none text-dark" href="produit.html?id=${data._id}">Voir produit</a>`
   desProd.textContent = data.description
-  priProd.textContent = `${data.price} Francs => ${Math.round(data.price/6.5597)} €`
+  priProd.textContent = `${data.price} €`
   cardText.appendChild(desProd)
   cardText.appendChild(priProd)
   cardText.appendChild(butProd)   
