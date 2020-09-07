@@ -1,4 +1,3 @@
-
 if(localStorage.length === 0){
     location.replace("paniervide.html")
 }
