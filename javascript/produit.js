@@ -1,11 +1,11 @@
-// Récupération de l'id du produit
+////// RECUPERATION DE L'ID DU PRODUIT ////////
 const queryString = window.location.search;
 const cameraId = new URLSearchParams(queryString).get('id');
 console.log(cameraId);
 const api = "http://localhost:3000/api/cameras/" + cameraId;
 
 
-
+///// REQUETE API VIA FETCH ////////
 const getProduct = async function () {
   try {
     let response = await fetch(api);
@@ -14,7 +14,7 @@ const getProduct = async function () {
       console.log(data)
 
 
-
+      ////// FONCTION MODIFICATION DOM ///////
       function templateItems() {
 
 
@@ -88,33 +88,26 @@ const getProduct = async function () {
 
 
 
-
+        // Ecouteur d'évènement sur le clic pour ajouté un produit dans localStorage
         butProd.addEventListener('click', function () {
-          if(selectLenses.value === ""){
-            butProd.textContent= "Selectionnez une lentille !"
+          if (selectLenses.value === "") {
+            butProd.textContent = "Selectionnez une lentille !"
           } else {
-          if (quantity <= 0, quantity++) {
+            if (quantity <= 0, quantity++) {
+            }
+            addToCart(data)
+            butProd.textContent = `Ajouté ! +${quantity}`
           }
-          addToCart(data)
-          butProd.textContent = `Ajouté ! +${quantity}`}
         })
 
 
-        /*function totalPriceInCart(){
-          let totalPriceInCart = localStorage.getItem("totalPriceInCart");
-          totalPriceInCart = JSON.parse(totalPriceInCart);
-          totalPriceInCart = totalPriceInCart + dataPrice;
-          localStorage.setItem("totalPriceInCart", totalPriceInCart);
-        }
-  
-        totalPriceInCart();*/
-        //let totalPriceInCart = [data.price]
         let quantity = 0
-
+        // variable contenant les informations des produits ajouté dans localStorage
         const prodInfo = [data._id, data.name, data.price]
 
         // fonction Ajout au panier avec gestion de la quantité 
 
+        /////// FONCTION AJOUT DANS LE PANIER //////
         function addToCart(data) {
           let cartProducts = []
           let saveToCartProduct = {
@@ -132,8 +125,6 @@ const getProduct = async function () {
           }
           else {
             cartProducts = JSON.parse(localStorage.getItem('cartProducts'))
-
-
             cartProducts.forEach((prod) => {
               if (data._id === prod._id && data.selectLenses === prod.selectlenses) {
                 prod.quantity++;
@@ -146,7 +137,8 @@ const getProduct = async function () {
           }
           checkCart()
         }
-// Fonction de controle du panier (possibilité afficher quantité total dans panier)
+
+        /////// FONCTION DU CONTROLE DE PANIER (possibilité afficher quantité total dans panier) //////////
         function checkCart() {
           let nb = 0;
 
@@ -157,7 +149,7 @@ const getProduct = async function () {
               nb = nb + prod.quantity;
             });
           }
-console.log(nb)
+          console.log(nb)
         }
 
 
@@ -168,7 +160,7 @@ console.log(nb)
         const imgProd = data.imageUrl
         cardImg.setAttribute('src', imgProd)
 
-
+        // condition de redirection vers la page paniervide.html si localStorage vide
         const lienPanier = document.getElementById("lienpanier")
         if (localStorage.length === 0) {
           lienPanier.setAttribute('href', 'paniervide.html')

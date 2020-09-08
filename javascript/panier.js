@@ -3,12 +3,13 @@ function articlesPanier() {
 
     let total = 0
 
+    // condition de redirection vers la page paniervide.html si localStorage vide
     if (localStorage.length === 0) {
-        location.replace('http://127.0.0.1:5500/html/paniervide.html')
+        lienPanier.setAttribute('href', 'paniervide.html')
     }
 
 
-
+    // Modification DOM pour créer Div récapitulative du panier
     const rowId = document.getElementById('contenupanier')
     const divCol = document.createElement('div')
     divCol.setAttribute('class', 'col-md-8 order-md-2 mb-4')
@@ -28,17 +29,19 @@ function articlesPanier() {
 
 
     let product = ""
-
+    // DECLARATION CONSTANTE cartInformation QUI VA SERVIR POUR POST DANS L'API
     const cartInformation = {
         contact: {},
         products: []
     }
+
+    ///// AFFICHE CHARQUE PRODUIT AJOUTE DANS LOCALSTORAGE DANS LE RECAPITULATIF PANIER
     for (let i = 0; i < localStorage.length; i++) {
 
         products = JSON.parse(localStorage.getItem(('cartProducts')))
         console.log(product)
         products.forEach((product, index) => {
-            
+
             total = total + (product.price * product.quantity)
 
             const nomProd = product.name
@@ -65,24 +68,25 @@ function articlesPanier() {
             price.textContent = `${priceProd} €/pce = ${sousTotal} €`
             liList.appendChild(price)
 
-            cartInformation.products.push(idProd)
+            cartInformation.products.push(idProd) // push des id produit dans cartInformation
 
         })
-        
+
 
     };
 
-console.log(cartInformation)
+    console.log(cartInformation)
 
 
     console.log(localStorage)
 
-
+    // Affichage du prix total dans récapitulatif panier
     const liPrice = document.createElement('li')
     liPrice.setAttribute('class', 'list-group-item d-flex justify-content-between')
     liPrice.innerHTML = `<span>Total (EUR)</span><strong>${total} €</strong>`
     ulList.appendChild(liPrice)
 
+    // bouton qui vide le localStorage et redirige vers page paniervide.html
     const butVider = document.getElementById('viderpanier')
     butVider.addEventListener('click', function () {
         localStorage.clear()
@@ -90,7 +94,7 @@ console.log(cartInformation)
         window.setTimeout(function () { location.replace("paniervide.html") }, 2000)
     })
 
-
+    // Déclaration emplacement DOM pour formulaire
     const prenomId = document.getElementById('prenom')
     const nomId = document.getElementById('nom')
     const adresseId = document.getElementById('adresse')
@@ -98,7 +102,7 @@ console.log(cartInformation)
     const emailId = document.getElementById('email')
     const btnCommande = document.getElementById('confirmercommande')
 
-
+    //////// FONCTION DE VERIFICATION CHAMPS FORMULAIRE ///////////
     const validationForm = () => {
 
         const isNotEmpty = value => value !== "" ? true : false;
@@ -111,11 +115,6 @@ console.log(cartInformation)
         const isValidEmail = (value) => value.match(regexEmail) ? true : false;
         const isValidInput = (value) => isNotEmpty(value) && isLongEnough(value) && doNotContainNumber(value) && doNotContainSpecialCharacter(value);
 
-        /*const prenomErrorMessage = document.getElementById('prenominvalide')
-        const nomErrorMessage = document.getElementById('prenominvalide')
-        const adresseMessage = document.getElementById('prenominvalide')
-        const villeErrorMessage = document.getElementById('prenominvalide')
-        const emailErrorMessage = document.getElementById('prenominvalide')*/
         const prenom = prenomId.value
         const nom = nomId.value
         const adresse = adresseId.value
@@ -155,7 +154,7 @@ console.log(cartInformation)
             emailId.setAttribute('placeholder', 'Email requis !')
             return false
         }
-
+        // return des inputs contact dans cartInformation
         return cartInformation.contact = {
             "firstName": prenom,
             "lastName": nom,
@@ -169,7 +168,7 @@ console.log(cartInformation)
     console.log(JSON.stringify(cartInformation))
 
 
-
+    /////// FONCTION REQUETE POST FETCH ///////
     const postData = async (method, url, dataElt) => {
         const response = await fetch(url, {
             headers: {
@@ -181,24 +180,24 @@ console.log(cartInformation)
         return await response.json();
     }
 
-
+    ////// ECOUTEUR EVENEMENT BOUTON ENVOI DE CARTINFORMATION DANS API ////// 
     btnCommande.addEventListener('click', async function (e) {
         e.preventDefault()
         if (validationForm()) {
 
             btnCommande.textContent = "Veuillez patienter ..."
             const formValid = validationForm()
+            // Utilisation fonction postData avec paramètre, inscription retour api dans l'url 
             if (formValid !== false) {
                 const response = await postData('POST', 'http://localhost:3000/api/cameras/order', cartInformation)
                 console.log(response.orderId)
-                window.setTimeout(function(){window.location =`confirmation.html?id=${response.orderId}&price=${total}&user=${prenom.value}`}, 2000)
+                window.setTimeout(function () { window.location = `confirmation.html?id=${response.orderId}&price=${total}&user=${prenom.value}` }, 2000)
             }
         } else {
             validationForm()
             btnCommande.textContent = "Veuillez remplir correctement les champs ..."
         }
-        //localStorage.clear()
-        console.log(postData('POST', 'http://localhost:3000/api/cameras/order', cartInformation))
+
 
         console.log(cartInformation)
     })
