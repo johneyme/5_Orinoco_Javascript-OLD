@@ -1,5 +1,6 @@
+const lienPanier = document.getElementById("lienpanier")
 if (localStorage.length === 0) {
-    location.replace("paniervide.html")
+    lienPanier.setAttribute('href', 'paniervide.html')
 }
 
 //Recherche de données dans l'URL

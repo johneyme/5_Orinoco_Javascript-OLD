@@ -3,6 +3,7 @@
 const lienPanier = document.getElementById("lienpanier")
 if (localStorage.length === 0) {
     lienPanier.setAttribute('href', 'paniervide.html')
-} else {
+}
+else {
     location.replace("panier.html")
 }

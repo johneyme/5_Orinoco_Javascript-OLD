@@ -4,10 +4,10 @@ function articlesPanier() {
     let total = 0
 
     // condition de redirection vers la page paniervide.html si localStorage vide
+    const lienPanier = document.getElementById("lienpanier")
     if (localStorage.length === 0) {
         lienPanier.setAttribute('href', 'paniervide.html')
     }
-
 
     // Modification DOM pour créer Div récapitulative du panier
     const rowId = document.getElementById('contenupanier')
