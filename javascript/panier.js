@@ -25,9 +25,6 @@ function articlesPanier() {
     ulList.setAttribute('class', "list-group mb-3")
     divCol.appendChild(ulList)
 
-
-
-
     let product = ""
     // DECLARATION CONSTANTE cartInformation QUI VA SERVIR POUR POST DANS L'API
     const cartInformation = {
@@ -36,48 +33,41 @@ function articlesPanier() {
     }
 
     ///// AFFICHE CHARQUE PRODUIT AJOUTE DANS LOCALSTORAGE DANS LE RECAPITULATIF PANIER
-    for (let i = 0; i < localStorage.length; i++) {
 
-        products = JSON.parse(localStorage.getItem(('cartProducts')))
-        console.log(product)
-        products.forEach((product, index) => {
+    products = JSON.parse(localStorage.getItem(('cartProducts')))
+    products.forEach((product, index) => {
 
-            total = total + (product.price * product.quantity)
+        total = total + (product.price * product.quantity)
 
-            const nomProd = product.name
-            const priceProd = product.price
-            const quantProd = product.quantity
-            const idProd = product._id
-            sousTotal = (quantProd * priceProd)
+        const nomProd = product.name
+        const priceProd = product.price
+        const quantProd = product.quantity
+        const idProd = product._id
+        sousTotal = (quantProd * priceProd)
 
-            const liList = document.createElement('li')
-            liList.setAttribute('class', 'list-group-item d-flex justify-content-between lh-condensed')
-            ulList.appendChild(liList)
+        const liList = document.createElement('li')
+        liList.setAttribute('class', 'list-group-item d-flex justify-content-between lh-condensed')
+        ulList.appendChild(liList)
 
-            const div = document.createElement('div')
-            liList.appendChild(div)
+        const div = document.createElement('div')
+        liList.appendChild(div)
 
 
-            const itemTitle = document.createElement('h6')
-            itemTitle.setAttribute("class", 'my-0')
-            itemTitle.textContent = `${nomProd} | Quantité: ${quantProd}`
-            div.appendChild(itemTitle)
+        const itemTitle = document.createElement('h6')
+        itemTitle.setAttribute("class", 'my-0')
+        itemTitle.textContent = `${nomProd} | Quantité: ${quantProd}`
+        div.appendChild(itemTitle)
 
-            const price = document.createElement('span')
-            price.setAttribute('class', 'text-muted')
-            price.textContent = `${priceProd} €/pce = ${sousTotal} €`
-            liList.appendChild(price)
+        const price = document.createElement('span')
+        price.setAttribute('class', 'text-muted')
+        price.textContent = `${priceProd} €/pce = ${sousTotal} €`
+        liList.appendChild(price)
 
-            cartInformation.products.push(idProd) // push des id produit dans cartInformation
+        cartInformation.products.push(idProd) // push des id produit dans cartInformation
 
-        })
-
-
-    };
+    })
 
     console.log(cartInformation)
-
-
     console.log(localStorage)
 
     // Affichage du prix total dans récapitulatif panier
@@ -190,8 +180,8 @@ function articlesPanier() {
             // Utilisation fonction postData avec paramètre, inscription retour api dans l'url 
             if (formValid !== false) {
                 const response = await postData('POST', 'http://localhost:3000/api/cameras/order', cartInformation)
-                console.log(response.orderId)
                 window.setTimeout(function () { window.location = `confirmation.html?id=${response.orderId}&price=${total}&user=${prenom.value}` }, 2000)
+
             }
         } else {
             validationForm()
