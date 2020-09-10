@@ -96,7 +96,7 @@ function articlesPanier() {
     const validationForm = () => {
 
         const isNotEmpty = value => value !== "" ? true : false;
-        const isLongEnough = value => value.length >= 2 ? true : false;
+        const isLongEnough = value => value.length >= 3 ? true : false;
         const containNumber = /[0-9]/;
         const doNotContainNumber = value => !value.match(containNumber) ? true : false;
         const specialCharacter = /[$£°&+,:;=?@#|'<>.^*()!"{}_]/
@@ -112,36 +112,41 @@ function articlesPanier() {
         const email = emailId.value
 
         if (isValidInput(prenom)) {
+            prenomId.setAttribute('class', 'form-control bg-success')
             true
         } else {
-            prenomId.setAttribute('placeholder', 'Prenom requis !')
+            prenomId.setAttribute('placeholder', 'Votre prénom est requis !')
             return false
         }
 
         if (isValidInput(nom)) {
+            nomId.setAttribute('class', 'form-control bg-success')
             true
         } else {
-            nomId.setAttribute('placeholder', 'Nom requis !')
+            nomId.setAttribute('placeholder', 'Votre nom est requis !')
             return false
         }
 
         if (isNotEmpty(adresse) && isLongEnough(adresse)) {
+            adresseId.setAttribute('class', 'form-control bg-success')
             true
         } else {
-            adresseId.setAttribute('placeholder', 'Adresse requise !')
+            adresseId.setAttribute('placeholder', 'Votre adresse est requise !')
             return false
         }
         if (isValidInput(ville)) {
+            villeId.setAttribute('class', 'form-control bg-success')
             true
         } else {
-            villeId.setAttribute('placeholder', 'Ville requise !')
+            villeId.setAttribute('placeholder', 'Votre ville est requise !')
             return false
         }
 
         if (isValidEmail(email)) {
+            emailId.setAttribute('class', 'form-control bg-success')
             true
         } else {
-            emailId.setAttribute('placeholder', 'Email requis !')
+            emailId.setAttribute('placeholder', 'Votre email est requis !')
             return false
         }
         // return des inputs contact dans cartInformation
