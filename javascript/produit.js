@@ -101,9 +101,7 @@ const getProduct = async function () {
         })
 
 
-        let quantity = 0
-        // variable contenant les informations des produits ajouté dans localStorage
-        const prodInfo = [data._id, data.name, data.price]
+        let quantity = 0;
 
         // fonction Ajout au panier avec gestion de la quantité 
 
